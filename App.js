@@ -1,49 +1,43 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import Canvas from 'react-native-canvas';
+import { Dimensions } from 'react-native';
+import Game from "./Game.js";
+import MainMenu from "./MainMenu.js";
+import GameSingletonInstance from "./GameSingleton";
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+export default class App extends Component {
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+  constructor()
+  {
+    super();
+  }
+ 
+  handleCanvas = (canvas) => {
+    canvas.height = Dimensions.get('window').height;
+    canvas.width = Dimensions.get('window').width;
+    
+    const ctx = canvas.getContext('2d');
+    // ctx.fillStyle = '#162802';
+    // ctx.fillRect(0,0,canvas.width, canvas.height);
 
-type Props = {};
-export default class App extends Component<Props> {
+    
+    GameSingletonInstance.Setup(canvas.width, canvas.height, ctx);
+
+    var game = new Game();
+    var mainMenu = new MainMenu();
+    game.LoadGameState(mainMenu);
+
+    // set singleton
+    
+
+    game.Cycle()
+    //var gameLoopInterval = setInterval(() => {game.Cycle()}, 125);
+
+  }
+ 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+      <Canvas ref={this.handleCanvas}/>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
