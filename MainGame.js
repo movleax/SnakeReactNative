@@ -1,4 +1,5 @@
 import GameState from './GameState.js';
+import Swiper from "./Swiper.js";
 
 export default class MainGame extends GameState
 {
@@ -15,13 +16,13 @@ export default class MainGame extends GameState
 
         this.score = new ScoreText();
 
-        var keyboard = new KeyBoard();
-        keyboard.AddKeyBoardCommand(new KeyBoardDownCommand(this.snake));
-        keyboard.AddKeyBoardCommand(new KeyBoardUpCommand(this.snake));
-        keyboard.AddKeyBoardCommand(new KeyBoardLeftCommand(this.snake));
-        keyboard.AddKeyBoardCommand(new KeyBoardRightCommand(this.snake));
+        var swiper = new Swiper();
+        swiper.AddSwipeCommand(new SwipeDownCommand(this.snake));
+        swiper.AddSwipeCommand(new SwipeUpCommand(this.snake));
+        swiper.AddSwipeCommand(new SwipeLeftCommand(this.snake));
+        swiper.AddSwipeCommand(new SwipeRightCommand(this.snake));
 
-        this.AddKeyBoard(keyboard);
+        this.AddSwiper(keyboard);
 
         this.AddGameObject(this.score);
         this.AddGameObject(this.foodController);

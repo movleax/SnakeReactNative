@@ -2,6 +2,8 @@ import GameState from './GameState.js';
 import TitleText from './TitleText.js';
 import StartText from './StartText.js';
 import GameProxy from "./GameProxy.js";
+import Toucher from './Toucher.js';
+import TouchTapCommand from "./TouchTapCommand.js";
 
 export default class MainMenu extends GameState
 {
@@ -12,11 +14,10 @@ export default class MainMenu extends GameState
         this.titleText = new TitleText();
         this.startText = new StartText();
 
-        // var keyboard = new KeyBoard();
-        // keyboard.AddKeyBoardCommand(new KeyBoardSpaceCommand(this));
+        var toucher = new Toucher();
+        toucher.AddTouchCommand(new TouchTapCommand(this));
 
-        // this.AddKeyBoard(keyboard);
-
+        this.AddToucher(toucher);
         this.AddGameObject(this.titleText);
         this.AddGameObject(this.startText);
     }

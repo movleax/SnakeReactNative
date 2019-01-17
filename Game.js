@@ -22,17 +22,28 @@ export default class Game extends iGame
             return;
         }
 
-        // disable current state keyboard
-        if(this.gameState != null && this.gameState.GetKeyBoard() != null)
-        {
-          //  this.gameState.keyBoard.UnSetKeyBoardListener();
-        }
-
         // assign to this.gameState
         this.gameState = gameState;
 
-        // set this.gameState keyboard as active
-        //this.gameState.keyBoard.SetKeyBoardListener();
+        // set this.gameState Swiper
+        
+
+    }
+
+    HandleSwipeInput(swipe)
+    {
+        if(this.gameState.GetSwiper())
+        {
+            this.gameState.GetSwiper().CallBack_HandleInput(swipe);
+        }
+    }
+
+    HandleTouchInput(touch)
+    {
+        if(this.gameState.GetToucher())
+        {
+            this.gameState.GetToucher().CallBack_HandleInput(touch);
+        }
     }
 
     Draw()

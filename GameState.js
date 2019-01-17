@@ -12,7 +12,8 @@ export default class GameState extends iGame
         this.ctx = GameSingletonInstance.ctx;
 
         this.gameObjects = [];
-        this.keyBoard;
+        this.swiper;
+        this.toucher;
         this.stateHasChanged = false;
         this.currentState;
     }
@@ -22,14 +23,25 @@ export default class GameState extends iGame
         return this.gameObjects;
     }
 
-    GetKeyBoard()
+    GetSwiper()
     {
-        return this.keyBoard;
+        return this.swiper;
     }
 
-    AddKeyBoard(newKeyBoard)
+    AddSwiper(newSwiper)
     {
-        this.keyBoard = newKeyBoard;
+        this.swiper = newSwiper;
+    }
+
+
+    GetToucher()
+    {
+        return this.toucher;
+    }
+
+    AddToucher(newToucher)
+    {
+        this.toucher = newToucher;
     }
 
     AddGameObject(obj)
